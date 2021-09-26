@@ -1,12 +1,13 @@
 import './App.css';
-import Header from './Header.js'
-import List from './List.js'
+import Book from './Book'
 
 function App() {
   return (
     <div className="App">
-      <Header />
-      <List />
+      <h1>Welcome to the NYT Bestsellers List</h1>
+      <h3>Hardback Fiction</h3>
+      <p>As of: <span>{new Date().toLocaleString()}</span></p>
+      <Book className="book-list"/>
     </div>
   );
 }
