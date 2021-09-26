@@ -34,7 +34,6 @@ const App = ()=> {
       <div className="books">
         {books.map((book, index) => (
           <Book
-            className="book-list"
             key={book.title}
             title={book.title}
             index={index + 1}
