@@ -12,8 +12,7 @@ const URL = `https://api.nytimes.com/svc/books/v3/lists/current/${selection}.jso
 const App = ()=> {
 
   // initial states set to empty
-  // query of '' is the same as returning every recipe
-  const [books, setBooks] = useState([])
+   const [books, setBooks] = useState([])
 
   // renders function
   useEffect(() => {
