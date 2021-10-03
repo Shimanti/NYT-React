@@ -2,11 +2,12 @@
   --color: lightslategrey;
 }
 
+/* Puts each book from the API into a column */
 .books {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: stretch;
 }
 
 .book {
@@ -14,7 +15,7 @@
   display: flex;
   align-items: stretch;
   height: 122px;
-  max-width: 500px;
+  max-width: 580px;
 }
 
 .index {
@@ -27,28 +28,15 @@
 
 img {
   height: 120px;
-  width: auto;
 }
 
 .textual {
-  min-width: 300px;
+  min-width: 150px;
 }
 
 .name, .author, .description {
   font-size: 14px;
   margin: 5px;
-  padding-left: 5px;
+  padding: 0 5px;
   text-align: left;
-}
-
-.book-url {
-  margin: 5%;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  align-content: flex-end;
-}
-
-.book-url:hover {
-  color: black;
 }
