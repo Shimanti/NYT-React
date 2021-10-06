@@ -2,6 +2,7 @@ import './App.css'
 import {useEffect, useState} from 'react'
 import Book from './Book'
 import Header from './Header'
+import Button from './Button'
 
 // NY Times API URL - change if the API location changes
 const selection ='hardcover-fiction'
@@ -31,6 +32,7 @@ const App = ()=> {
   return (
     <div className="App">
       <Header />
+      <Button />
       <div className="books">
         {books.map((book, index) => (
           <Book
