@@ -18,7 +18,7 @@ const Button = () => {
 
   return (
     <div className={buttonStyle}>
-      <button class="button-40" id="btn">
+      <button className="button-40">
         Click for NonFiction
       </button>
     </div>
