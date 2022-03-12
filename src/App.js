@@ -1,33 +1,32 @@
-import './App.css'
-import {useEffect, useState} from 'react'
-import Book from './Book'
-import Header from './Header'
-import Button from './Button'
+import './App.css';
+import { useEffect, useState } from 'react';
+import Book from './Book';
+import Header from './Header';
+import Button from './Button';
 
 // NY Times API URL - change if the API location changes
-const selection ='hardcover-fiction'
-const API_Key='wuDGORmXAWnBvUGYjc30Wsqgtz87l1wj'
-const URL = `https://api.nytimes.com/svc/books/v3/lists/current/${selection}.json?api-key=${API_Key}`
+const selection = 'hardcover-fiction';
+const API_Key = 'wuDGORmXAWnBvUGYjc30Wsqgtz87l1wj';
+const URL = `https://api.nytimes.com/svc/books/v3/lists/current/${selection}.json?api-key=${API_Key}`;
 
 // app retrieves NYT Times bestselling books from the API
-const App = ()=> {
-
+const App = () => {
   // initial states set to empty
-   const [books, setBooks] = useState([])
+  const [books, setBooks] = useState([]);
 
+  const getBooks = async () => {
+    const response = await fetch(URL);
+    const data = await response.json();
+    const books = data.results.books.slice(0, 10);
+    setBooks(books);
+    console.log(books);
+  };
   // renders function
   useEffect(() => {
-    getBooks()
-  }, [])
+    getBooks();
+  }, []);
 
   // gets books from API
-  const getBooks = async () => {
-    const response = await fetch(URL)
-    const data = await response.json()
-    const books = data.results.books.slice(0, 10)
-    setBooks(books)
-    // console.log(books)
-  }
 
   return (
     <div className="App">
@@ -40,7 +39,10 @@ const App = ()=> {
             title={book.title}
             index={index + 1}
             author={book.author}
-            bookUrl={book.amazon_product_url.replace("NYTBSREV-20","shimanti-20")}
+            bookUrl={book.amazon_product_url.replace(
+              'NYTBSREV-20',
+              'shimanti-20'
+            )}
             image={book.book_image}
             description={book.description}
           />
@@ -48,6 +50,6 @@ const App = ()=> {
       </div>
     </div>
   );
-}
+};
 
 export default App;
