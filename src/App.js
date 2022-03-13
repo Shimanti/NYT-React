@@ -1,38 +1,53 @@
-import './App.css'
-import {useEffect, useState} from 'react'
-import Book from './Book'
-import Header from './Header'
-import Button from './Button'
+import './App.css';
+import { useEffect, useState } from 'react';
+import Book from './Book';
+import Header from './Header';
+import Button from './Button';
 
 // NY Times API URL - change if the API location changes
-const selection ='hardcover-fiction'
-const API_Key='wuDGORmXAWnBvUGYjc30Wsqgtz87l1wj'
-const URL = `https://api.nytimes.com/svc/books/v3/lists/current/${selection}.json?api-key=${API_Key}`
+const API_Key = 'wuDGORmXAWnBvUGYjc30Wsqgtz87l1wj';
 
 // app retrieves NYT Times bestselling books from the API
-const App = ()=> {
-
+const App = () => {
   // initial states set to empty
-   const [books, setBooks] = useState([])
+  const [books, setBooks] = useState([]);
+  // * This handles the state whether the current books are or aren't fiction
+  const [isNonFiction, setIsNonFiction] = useState(false);
 
-  // renders function
-  useEffect(() => {
-    getBooks()
-  }, [])
+  // get books from api
+  // * Now getBooks is a little more dynamic, we can insert the type of books we want to get
+  const getBooks = async (type) => {
+    const URL = `https://api.nytimes.com/svc/books/v3/lists/current/${type}.json?api-key=${API_Key}`;
 
-  // gets books from API
-  const getBooks = async () => {
-    const response = await fetch(URL)
-    const data = await response.json()
-    const books = data.results.books.slice(0, 10)
-    setBooks(books)
+    const response = await fetch(URL);
+    const data = await response.json();
+    const books = data.results.books.slice(0, 10);
+    setBooks(books);
     // console.log(books)
-  }
+  };
+  // renders function
+  // * This will grab the books initially (on the initial render) and if there's a
+  // * change in the type of books, we'll grab the books accordingly.
+  useEffect(() => {
+    getBooks(isNonFiction ? 'hardcover-nonfiction' : 'hardcover-fiction');
+  }, [isNonFiction]);
+
+  // * This function gets passed down to the <Button> component so that whenever we
+  // * click the button the book type changes, which then triggers our useEffect function
+  // * above
+  const handleBookTypeChangeClick = () => {
+    // * setState can take a function which contains the previous state. This just
+    // * toggle isNonFiction to false or true
+    setIsNonFiction((previousState) => !previousState);
+  };
 
   return (
     <div className="App">
       <Header />
-      <Button />
+      <Button
+        currentBookType={isNonFiction ? 'NonFiction' : 'Fiction'}
+        handleClick={handleBookTypeChangeClick}
+      />
       <div className="books">
         {books.map((book, index) => (
           <Book
@@ -40,7 +55,10 @@ const App = ()=> {
             title={book.title}
             index={index + 1}
             author={book.author}
-            bookUrl={book.amazon_product_url.replace("NYTBSREV-20","shimanti-20")}
+            bookUrl={book.amazon_product_url.replace(
+              'NYTBSREV-20',
+              'shimanti-20'
+            )}
             image={book.book_image}
             description={book.description}
           />
@@ -48,6 +66,6 @@ const App = ()=> {
       </div>
     </div>
   );
-}
+};
 
 export default App;

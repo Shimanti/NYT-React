@@ -1,28 +1,16 @@
-import React from 'react'
-import buttonStyle from './button.css'
+import React from 'react';
+import buttonStyle from './button.css';
 
-const Button = () => {
-
-  // const button = document.querySelector('button')
-  // button.addEventListener('click', changeButton)
-  //
-  // function changeButton() {
-  //   const btn = document.querySelector('#btn')
-  //   if (btn.innerHTML == "Fiction") {
-  //       btn.innerHTML = "Non Fiction"
-  //   } else if (btn.innerHTML == "Non Fiction") {
-  //       btn.innerHTML = "Fiction"
-  //
-  //   }
-  // }
-
+// * currentBookType can be "NonFiction" or "Fiction"
+// * we also pass down a function through "handleClick" from a parent component
+const Button = ({ currentBookType, handleClick }) => {
   return (
     <div className={buttonStyle}>
-      <button className="button-40">
-        Click for NonFiction
+      <button onClick={handleClick} className="button-40">
+        Click for {currentBookType}
       </button>
     </div>
-  )
-}
+  );
+};
 
-export default Button
+export default Button;
