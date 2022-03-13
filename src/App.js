@@ -38,7 +38,7 @@ const App = () => {
   const handleBookTypeChangeClick = () => {
     // * setState can take a function which contains the previous state. This just
     // * toggle isNonFiction to false or true
-    setIsNonFiction((previousState) => !previousState);
+    setIsNonFiction(previousState) => !previousState);
   };
 
   return (
