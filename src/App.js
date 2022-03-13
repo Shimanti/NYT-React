@@ -39,6 +39,7 @@ const App = () => {
     // * setState can take a function which contains the previous state. This just
     // * toggle isNonFiction to false or true
     setIsNonFiction(previousState => !previousState);
+    getBooks(isNonFiction ? 'hardcover-nonfiction' : 'hardcover-fiction');
   };
 
   return (
