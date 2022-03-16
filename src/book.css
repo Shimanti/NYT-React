@@ -50,6 +50,9 @@ img {
 }
 
 @media (min-width: 600px) {
+    .name, .author, .description {
+    font-size: 1.1rem;
+  }
   .book {
     width: 700px;
   }
