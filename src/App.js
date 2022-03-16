@@ -45,7 +45,7 @@ const App = () => {
     <div className="App">
       <Header />
       <Button
-        currentBookType={isNonFiction ? 'NonFiction' : 'Fiction'}
+        currentBookType={isNonFiction ? 'Fiction' : 'NonFiction'}
         handleClick={handleBookTypeChangeClick}
       />
       <div className="books">
